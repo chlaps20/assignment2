@@ -102,13 +102,16 @@ namespace Assignment2
 
             for (int z = 0; z < playerScore.Length; z++)
             {
-                Console.WriteLine("{0}: {1}, {2}", players[z], playerScore[z], userAnswers[z]);
-                StreamWriter name = new StreamWriter("exam.txt");
-                name.Close();
+                using (StreamWriter sr = File.AppendText("exam.txt"))
+                {
+                    sr.WriteLine("{0}: {1}/80, {2}", players[z], playerScore[z], userAnswers[z]);
+                    sr.Close();
+
+                    Console.WriteLine(File.ReadAllText("exam.txt"));
+
+                }
             }
-
-            Console.WriteLine(userAnswers);
-
+            
             Console.ReadKey();
 
         }
