@@ -1,4 +1,4 @@
-// Roman Chlapak, 101184746 | leonary Cherepaha,
+// Roman Chlapak, 101184746 | Leonard Cherepaha,
 using System;
 using System.IO;
 
