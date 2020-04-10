@@ -1,4 +1,4 @@
-// Roman Chlapak, 101184746 | Leonard Cherepaha,
+// Roman Chlapak, 101184746 | leonary Cherepaha,
 using System;
 using System.IO;
 
@@ -30,13 +30,9 @@ namespace Assignment2
                     "19. How long can a goalkeeper hold onto the ball for according to the official FIFA rulebook? \n A:No Limit \n B:10 Seconds \n C:3 Seconds \n D:5 Seconds \n E:15 Seconds",
                     "20. Who is known as the “King of Soccer” \n A:Pele \n B:Cristiano Ronaldo  \n C:Lionel Messi  \n D:Zinedine Zidane \n E:Diego Maradona" };
             string[] answers = { "A", "B", "A", "B", "B", "D", "A", "A", "C", "B", "C", "A", "B", "A", "C", "A", "C", "D", "D", "A" };
-            int numOfPlayers;
+            
             int[] numOfCorrectAnswers = new int[20] { 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0};
-            int highestScore = 0;
-            int lowestScore= 80;
-            int totalScore = 0;
-            int averageScore = 0;
-
+            int numOfPlayers,highestScore = 0,totalScore = 0,averageScore = 0,lowestScore = 80 ;
 
             //INPUT
             Console.WriteLine("Welcome to my test!");
@@ -65,7 +61,7 @@ namespace Assignment2
                 players[i] = Console.ReadLine();
 
             }
-
+          
             for (int i = 0; i < numOfPlayers; i++)
             {
                 Console.WriteLine("-----------------Contestant: {0}-----------------", players[i]);
@@ -76,10 +72,29 @@ namespace Assignment2
                     Console.WriteLine(questions[z]);
                    
                     answer = Console.ReadLine();
-
-                    for(int k = 0; k < userAnswers.Length; k++)
+                    //correct answer
+                    if (answer == answers[z])
                     {
-                        if(answer == "")
+                        Console.WriteLine("Correct");
+                        playerScore[i] += 4;
+                        numOfCorrectAnswers[i]++;
+
+                    }
+                    //skipped
+                    else if (answer == "")
+                    {
+                        playerScore[i] += 0;
+                    }
+                    //incorrect answer
+                    else
+                    {
+                        Console.WriteLine("Oops, Not correct");
+                        playerScore[i] -= 1;
+                    };
+                    // user skips question
+                    for (int k = 0; k < userAnswers.Length; k++)
+                    {
+                        if (answer == "")
                         {
                             userAnswers[k] += "X";
                         }
@@ -87,28 +102,12 @@ namespace Assignment2
                         {
                             userAnswers[k] += answer;
                         }
-                        
-                    }
-
-                    if (answer == answers[z])
-                    {
-                        Console.WriteLine("Correct");
-                        playerScore[i] += 4;
 
                     }
-                    else if (answer == "")
-                    {
-                        playerScore[i] += 0;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Oops, Not correct");
-                        playerScore[i] -= 1;
-                    };
-
                 }
             }
 
+            //highest,lowest,average score
             for (int k = 0; k < playerScore.Length; k++)
             {
 
@@ -127,6 +126,7 @@ namespace Assignment2
                 averageScore = totalScore / numOfPlayers;
             }
 
+            //exam.txt file, ID : mark out of 80
             for (int z = 0; z < playerScore.Length; z++)
             {
 
@@ -141,6 +141,7 @@ namespace Assignment2
                 }
             }
 
+            //report.txt student report
             using (StreamWriter writer = new StreamWriter("../report.txt"))
             {
                 writer.WriteLine("********** MCQ STUDENT EXAM REPORT **********");
